@@ -18,6 +18,7 @@
   "homepage": "https://github.com/LetsGo12300/to-do-list#readme",
   "devDependencies": {
     "css-loader": "^6.7.1",
+    "date-fns": "^2.28.0",
     "style-loader": "^3.3.1",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2"
