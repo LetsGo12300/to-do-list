@@ -5,9 +5,8 @@ export default function view() {
 
     loadModal();
     loadTab();
-    //DOM.addProject.addEventListener('click', loadTab);
-
-
+    loadContent();
+    
 }
 
 const loadModal = function(){
@@ -30,12 +29,31 @@ const loadModal = function(){
 };
 
 function loadTab(){
+    // Show all current Projects
     const allProjects = controller.showProjects();
-
+    
     allProjects.forEach(project => {
         const h3 = document.createElement('h3');
         h3.textContent = project.project;
         h3.classList.add('project-title');
         DOM.project_titles.appendChild(h3);
     });
+
+    DOM.addProject.addEventListener('click', showAddForm);
+}
+
+function loadContent(){
+    // Show all to do items
+    const toDoItems = controller.showToDoItems();
+    
+    toDoItems.forEach(item => {
+        const div = document.createElement('div');
+        div.textContent = item.title;
+        div.classList.add('todo-item');
+        DOM.content.appendChild(div);
+    });
+}
+
+function showAddForm(){
+    DOM.addForm.style.display = 'block';
 }

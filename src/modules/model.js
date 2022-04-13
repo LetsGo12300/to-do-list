@@ -47,19 +47,11 @@ const model = (() => {
 
 
     function getToDoItems(){
-        //const retrievedData = localStorage.getItem('items');
-        //let updatedList = JSON.parse(retrievedData);
         return storageItems;
-        //console.log(storageItems);
-        //console.log(storageProjects);
     }
 
     function getProjects(){
-        //const retrievedData = localStorage.getItem('items');
-        //let updatedList = JSON.parse(retrievedData);
         return storageProjects;
-        //console.log(storageItems);
-        //console.log(storageProjects);
     }
 
     return {

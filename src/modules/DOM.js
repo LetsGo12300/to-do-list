@@ -10,6 +10,7 @@ const DOM = {
     modal: document.getElementById('todo-modal'),
     span: document.getElementsByClassName("close")[0],
     project_titles: document.getElementById('project-titles'),
+    addForm: document.getElementById('add-form'),
 };
 
 export default DOM;
