@@ -1,5 +1,3 @@
-import DOM from './DOM';
-
 const myLocalStorage = (() => {
     function updateItems(storageItems){
         localStorage.setItem('items', JSON.stringify(storageItems));
@@ -48,17 +46,27 @@ const model = (() => {
     }
 
 
-    function showStorage(){
+    function getToDoItems(){
         //const retrievedData = localStorage.getItem('items');
         //let updatedList = JSON.parse(retrievedData);
-        console.log(storageItems);
-        console.log(storageProjects);
+        return storageItems;
+        //console.log(storageItems);
+        //console.log(storageProjects);
+    }
+
+    function getProjects(){
+        //const retrievedData = localStorage.getItem('items');
+        //let updatedList = JSON.parse(retrievedData);
+        return storageProjects;
+        //console.log(storageItems);
+        //console.log(storageProjects);
     }
 
     return {
         addToDoItem,
         addProject,
-        showStorage,
+        getToDoItems,
+        getProjects,
     }
 
 })();
