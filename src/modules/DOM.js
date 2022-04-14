@@ -11,6 +11,10 @@ const DOM = {
     span: document.getElementsByClassName("close")[0],
     project_titles: document.getElementById('project-titles'),
     addForm: document.getElementById('add-form'),
+    addProjectForm: document.getElementById('add-project-form'),
+    svgClose: document.getElementById('svg-close'),
+    svgCheck: document.getElementById('svg-check'),
+    toDoForm: document.getElementById('todo-form')
 };
 
 export default DOM;

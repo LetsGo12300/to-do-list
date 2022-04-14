@@ -14,7 +14,7 @@ body{
     height: 100vh;
     display: grid;
     grid-template-rows: 100px 1fr 50px;
-    grid-template-columns: 20% 80%;
+    grid-template-columns: 30% 70%;
 }
 
 .header{
@@ -38,14 +38,14 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1.5em;
+    padding: 1em;
     color: white;
     background-color: #fcd34d;
 }
 
 .tab>button{
     width: 50%;
-    padding: 3px;
+    padding: 5px;
     margin: 2px 0px;
     border: none;
     font-size: 1em;
@@ -170,9 +170,16 @@ textarea, #title{
     align-items: center;
     justify-content: center;
     gap: 5px;
+    flex-wrap: wrap;
 }
 
 #new-project{
     padding: 5px;
     font-size: 1em;
+    border: none;
+    width: 100%;
+}
+
+.svg-form>svg{
+    margin-left: 5px;
 }

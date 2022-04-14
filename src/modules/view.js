@@ -6,7 +6,6 @@ export default function view() {
     loadModal();
     loadTab();
     loadContent();
-    
 }
 
 const loadModal = function(){
@@ -40,6 +39,10 @@ function loadTab(){
     });
 
     DOM.addProject.addEventListener('click', showAddForm);
+    DOM.toDoForm.addEventListener('submit', controller.addItem);
+    DOM.svgClose.addEventListener('click', hideAddForm);
+    DOM.svgCheck.addEventListener('click', controller.addProject);
+    DOM.addProjectForm.addEventListener('submit', controller.addProject);
 }
 
 function loadContent(){
@@ -55,5 +58,10 @@ function loadContent(){
 }
 
 function showAddForm(){
-    DOM.addForm.style.display = 'block';
+    DOM.addForm.style.display = 'flex';
 }
+
+function hideAddForm(){
+    DOM.addForm.style.display = 'none';
+}
+
