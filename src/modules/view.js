@@ -57,10 +57,12 @@ const setDisplay = ( () => {
     
     function showModal(){
         DOM.modal.style.display = "block";
+        updateView.renderOptions();
     }
     
     function hideModal(){
         DOM.modal.style.display = "none";
+        updateView.clearOptions();
     }
 
     return {
@@ -86,9 +88,26 @@ const updateView = ( () => {
         DOM.project_titles.appendChild(h3);
     }
 
+    function renderOptions(project){
+        const allProjects = controller.showProjects();
+
+        allProjects.forEach(project => {
+            const option = document.createElement('option');
+            option.value = project.project;
+            option.textContent = project.project;
+            DOM.project.appendChild(option);
+        });
+    }
+
+    function clearOptions(){
+        DOM.project.innerHTML = '';
+    }
+
     return {
         renderItem,
-        renderProject
+        renderProject,
+        renderOptions,
+        clearOptions
     }
 })();
 
