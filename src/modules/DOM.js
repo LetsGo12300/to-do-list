@@ -14,7 +14,8 @@ const DOM = {
     addProjectForm: document.getElementById('add-project-form'),
     svgClose: document.getElementById('svg-close'),
     svgCheck: document.getElementById('svg-check'),
-    toDoForm: document.getElementById('todo-form')
+    toDoForm: document.getElementById('todo-form'),
+    project: document.getElementById('project') // options for project
 };
 
 export default DOM;

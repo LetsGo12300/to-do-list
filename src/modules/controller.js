@@ -1,5 +1,6 @@
 import model from './model';
 import DOM from './DOM';
+import {setDisplay, updateView} from './view';
 
 const controller = (() => {
     const showProjects = () => {
@@ -18,14 +19,20 @@ const controller = (() => {
         let project = DOM.toDoForm.elements['project'].value;
         
         event.preventDefault();
-        model.addToDoItem(title, description, dueDate, priority, project);
+        let newItem = model.addToDoItem(title, description, dueDate, priority, project);
+        setDisplay.hideModal();
+        DOM.toDoForm.reset();
+        updateView.renderItem(newItem);
     };
 
     const addProject = (event) => {
         let project = DOM.addProjectForm.elements['new-project'].value;
 
         event.preventDefault();
-        model.addProject(project);
+        let newProject = model.addProject(project);
+        setDisplay.hideAddForm();
+        DOM.addProjectForm.reset();
+        updateView.renderProject(newProject);
     };
 
     return {

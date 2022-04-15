@@ -37,12 +37,14 @@ const model = (() => {
         const addedItem = new ToDoItem(title, description, dueDate, priority, project);
         storageItems.push(addedItem);
         myLocalStorage.updateItems(storageItems);
+        return addedItem;
     }
 
     function addProject(project){
         const addedProject = new Project(project);
         storageProjects.push(addedProject);
         myLocalStorage.updateProjects(storageProjects);
+        return addedProject;
     }
 
 
