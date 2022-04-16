@@ -40,15 +40,6 @@ function loadTab(){
     DOM.svgClose.addEventListener('click', setDisplay.hideAddForm);
     DOM.svgCheck.addEventListener('click', controller.addProject);
     DOM.addProjectForm.addEventListener('submit', controller.addProject);
-
-    Array.from(DOM.project_title).forEach(project => {
-        project.addEventListener('click', () => {
-            updateView.clearUnderline();
-            updateView.clearContent();
-            project.classList.add('current-project');
-            loadContent(project.textContent);
-        });
-    });
 }
 
 function loadContent(projectTitle){
@@ -62,10 +53,18 @@ function loadContent(projectTitle){
 }
 
 document.addEventListener('click', (event) => {
+    // if EDIT button is clicked
     if (event.target.className === 'edit-btn') {
         let item = controller.showItem(event.target.parentNode.parentNode.getAttribute('data-title'));
         setDisplay.showModal();
         populateModal.editToDoForm(item);
+    }
+    // if Project name is clicked
+    if (event.target.className === 'project-title'){
+        updateView.clearUnderline();
+        updateView.clearContent();
+        event.target.classList.add('current-project');
+        loadContent(event.target.textContent);
     }
 });
 
@@ -100,6 +99,7 @@ const updateView = ( () => {
         const div = document.createElement('div');
         div.classList.add('todo-item', item.priority);
         div.setAttribute('data-title', item.title);
+        div.setAttribute('data-project', item.project);
 
         const title = document.createElement('div');
         title.textContent = item.title;
@@ -148,7 +148,7 @@ const updateView = ( () => {
     }
 
     function clearUnderline(){
-        Array.from(DOM.project_title).forEach(project => {
+        Array.from(document.getElementsByClassName('project-title')).forEach(project => {
             project.classList.remove('current-project');
         });
     }

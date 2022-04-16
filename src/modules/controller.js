@@ -1,6 +1,6 @@
 import model from './model';
 import DOM from './DOM';
-import {setDisplay, updateView} from './view';
+import {setDisplay, updateView, loadTab} from './view';
 
 const controller = (() => {
     const showProjects = () => {

@@ -11,7 +11,6 @@ const DOM = {
     modalParagraph: document.getElementById('modal-p'),
     span: document.getElementsByClassName("close")[0],
     project_titles: document.getElementById('project-titles'), // ul of project titles
-    project_title: document.getElementsByClassName('project-title'), // all project titles
     addForm: document.getElementById('add-form'),
     addProjectForm: document.getElementById('add-project-form'),
     svgClose: document.getElementById('svg-close'),
