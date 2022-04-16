@@ -90,7 +90,7 @@ body{
 }
   
 
-.modal-content {
+.modal-content{
     background-color: #f0f9ff;
     margin: auto;
     padding: 20px;
@@ -230,4 +230,8 @@ textarea, #title{
     color: black;
     font-size: 1.5em;
     font-weight: bold;
+}
+
+h3>i{
+    color: #aaadb3;
 }

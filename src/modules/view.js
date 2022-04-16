@@ -10,14 +10,21 @@ function view() {
 
 const loadModal = function(){
     // When the user clicks the button, open the modal
-    DOM.addToDo.addEventListener('click', setDisplay.showModal);
+    DOM.addToDo.addEventListener('click', () => {
+        setDisplay.showModal();
+        populateModal.addToDoForm();    
+    });
 
     // When the user clicks on <span> (x), close the modal
-    DOM.span.addEventListener('click', setDisplay.hideModal);
+    DOM.span.addEventListener('click', () => {
+        setDisplay.hideModal();
+    });
 
     // When the user clicks anywhere outside of the modal, close it
     document.addEventListener('click', (event) => {
-        if (event.target == DOM.modal) setDisplay.hideModal();
+        if (event.target == DOM.modal) {
+            setDisplay.hideModal();
+        };
     });
 };
 
@@ -42,7 +49,6 @@ function loadTab(){
             loadContent(project.textContent);
         });
     });
-
 }
 
 function loadContent(projectTitle){
@@ -55,6 +61,14 @@ function loadContent(projectTitle){
     });
 }
 
+document.addEventListener('click', (event) => {
+    if (event.target.className === 'edit-btn') {
+        let item = controller.showItem(event.target.parentNode.parentNode.getAttribute('data-title'));
+        setDisplay.showModal();
+        populateModal.editToDoForm(item);
+    }
+});
+
 const setDisplay = ( () => {
     function showAddForm(){
         DOM.addForm.style.display = 'flex';
@@ -66,14 +80,11 @@ const setDisplay = ( () => {
     
     function showModal(){
         DOM.modal.style.display = "block";
-        updateView.renderModal();
-        updateView.renderOptions();
     }
     
     function hideModal(){
         DOM.modal.style.display = "none";
         DOM.modalParagraph.innerHTML = '';
-        updateView.clearOptions();
     }
 
     return {
@@ -97,9 +108,11 @@ const updateView = ( () => {
         const details = document.createElement('div');
         const editButton = document.createElement('button');
         editButton.textContent = 'EDIT';
+        editButton.classList.add('edit-btn');
         
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'DELETE';
+        deleteButton.classList.add('delete-btn');
 
         details.classList.add('details');
         details.appendChild(editButton);
@@ -130,10 +143,6 @@ const updateView = ( () => {
         });
     }
 
-    function clearOptions(){
-        DOM.project.innerHTML = '';
-    }
-
     function clearContent(){
         DOM.content.innerHTML = '';
     }
@@ -151,7 +160,18 @@ const updateView = ( () => {
         DOM.content.appendChild(div);
     }
 
-    function renderModal(){
+    return {
+        renderItem,
+        renderProject,
+        renderOptions,
+        clearContent,
+        clearUnderline,
+        renderProjectTitle
+    }
+})();
+
+const populateModal = (() => {
+    function addToDoForm(){
         const form = document.createElement('form');
         form.id = 'todo-form';
         form.innerHTML = `
@@ -198,17 +218,55 @@ const updateView = ( () => {
         DOM.modalParagraph.appendChild(form);
         DOM.toDoForm = document.getElementById('todo-form');
         DOM.toDoForm.addEventListener('submit', controller.addItem);
+        updateView.renderOptions();
+    }
+
+    function editToDoForm(item){
+        const form = document.createElement('form');
+        form.id = 'todo-form';
+        form.innerHTML = `
+            <h3>
+                
+                ${item.title} <i>(editing...)</i>
+            </h3>
+            <br>
+
+            <div>
+                <p>
+                    <label for="description"></label>
+                </p>
+                <textarea name="description" id="description" rows=6>${item.description}</textarea>
+            </div>
+
+            <div>
+                <label for="due-date">Edit due date:</label>
+                <input type="date" name="due-date" id="due-date" value=${item.dueDate} required>
+            </div>
+            
+            <div>
+                <label for="priority">Select priority:</label>
+                <input type="radio" id="low-priority" name="priority" value="low" required="required">
+                <label for="low-priority">Low</label>
+                <input type="radio" id="medium-priority" name="priority" value="medium">
+                <label for="medium-priority">Medium</label>
+                <input type="radio" id="high-priority" name="priority" value="high">
+                <label for="high-priority">High</label>
+            </div>
+
+            <div class="btn">
+                <button type="submit" id="submit-btn">Save To Do</button>
+            </div>
+        `;
+        DOM.modalParagraph.appendChild(form);
+        DOM.toDoForm = document.getElementById('todo-form');
+        DOM.toDoForm.addEventListener('submit', controller.addItem);
+
+        document.querySelector(`#${item.priority}-priority`).checked = 'checked';
     }
 
     return {
-        renderModal,
-        renderItem,
-        renderProject,
-        renderOptions,
-        clearOptions,
-        clearContent,
-        clearUnderline,
-        renderProjectTitle
+        addToDoForm,
+        editToDoForm
     }
 })();
 

@@ -8,8 +8,12 @@ const controller = (() => {
     };
 
     const showToDoItems = (projectTitle) => {
-        const projectItems = model.getToDoItems().filter(item => item.project === projectTitle);
-        return projectItems;
+        return model.getToDoItems().filter(item => item.project === projectTitle);
+        
+    };
+
+    const showItem = (title) => {
+        return model.getToDoItems().filter(item => item.title === title)[0]
     };
 
     const addItem = (event) => {
@@ -40,6 +44,7 @@ const controller = (() => {
     return {
       showProjects,
       showToDoItems,
+      showItem,
       addProject,
       addItem
     };
