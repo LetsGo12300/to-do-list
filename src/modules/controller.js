@@ -7,8 +7,9 @@ const controller = (() => {
         return model.getProjects();
     };
 
-    const showToDoItems = () => {
-        return model.getToDoItems();
+    const showToDoItems = (projectTitle) => {
+        const projectItems = model.getToDoItems().filter(item => item.project === projectTitle);
+        return projectItems;
     };
 
     const addItem = (event) => {

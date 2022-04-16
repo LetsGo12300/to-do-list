@@ -5,7 +5,7 @@ function view() {
 
     loadModal();
     loadTab();
-    loadContent();
+    loadContent('My Project');
 }
 
 const loadModal = function(){
@@ -24,7 +24,7 @@ const loadModal = function(){
 function loadTab(){
     // Show all current Projects
     const allProjects = controller.showProjects();
-    
+
     allProjects.forEach(project => {
         updateView.renderProject(project);
     });
@@ -34,11 +34,19 @@ function loadTab(){
     DOM.svgClose.addEventListener('click', setDisplay.hideAddForm);
     DOM.svgCheck.addEventListener('click', controller.addProject);
     DOM.addProjectForm.addEventListener('submit', controller.addProject);
+
+    Array.from(DOM.project_title).forEach(project => {
+        project.addEventListener('click', () => {
+            updateView.clearContent();
+            loadContent(project.textContent);
+        });
+    });
+
 }
 
-function loadContent(){
+function loadContent(projectTitle){
     // Show all to do items
-    const toDoItems = controller.showToDoItems();
+    const toDoItems = controller.showToDoItems(projectTitle);
     
     toDoItems.forEach(item => {
         updateView.renderItem(item);
@@ -82,10 +90,12 @@ const updateView = ( () => {
     }
 
     function renderProject(project){
+        const li = document.createElement('li');
         const h3 = document.createElement('h3');
         h3.textContent = project.project;
         h3.classList.add('project-title');
-        DOM.project_titles.appendChild(h3);
+        li.appendChild(h3);
+        DOM.project_titles.appendChild(li);
     }
 
     function renderOptions(project){
@@ -103,11 +113,16 @@ const updateView = ( () => {
         DOM.project.innerHTML = '';
     }
 
+    function clearContent(){
+        DOM.content.innerHTML = '';
+    }
+
     return {
         renderItem,
         renderProject,
         renderOptions,
-        clearOptions
+        clearOptions,
+        clearContent
     }
 })();
 
