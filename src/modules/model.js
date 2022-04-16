@@ -16,7 +16,6 @@ const myLocalStorage = (() => {
 const model = (() => {
     let storageItems = (JSON.parse(localStorage.getItem('items')) === null ? [] : JSON.parse(localStorage.getItem('items')));
     let storageProjects = (JSON.parse(localStorage.getItem('projects')) === null ? [{'project': 'My Project'}] : JSON.parse(localStorage.getItem('projects')));
-
     class ToDoItem {
         constructor(title, description, dueDate, priority, project) {
             this.title = title;
@@ -56,11 +55,19 @@ const model = (() => {
         return storageProjects;
     }
 
+    function updateItem(item, index){
+        storageItems[index].description = item.description;
+        storageItems[index].dueDate = item.dueDate;
+        storageItems[index].priority = item.priority;
+        myLocalStorage.updateItems(storageItems);
+    }
+
     return {
         addToDoItem,
         addProject,
         getToDoItems,
         getProjects,
+        updateItem
     }
 
 })();

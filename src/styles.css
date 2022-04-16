@@ -51,7 +51,7 @@ body{
     font-size: 1em;
 }
 
-.tab>button:hover, #submit-btn:hover{
+.tab>button:hover, #submit-btn:hover, #save-btn:hover{
     background-color: #d1d5db;
 }
 
@@ -112,7 +112,7 @@ body{
     cursor: pointer;
 }
 
-#todo-form>div{
+#todo-form>div, #save-form>div{
     margin-bottom: 10px;
 }
 
@@ -120,7 +120,7 @@ body{
     margin-top: 20px;
 }
 
-#submit-btn{
+#submit-btn, #save-btn{
     width: 150px;
     padding: 6px;
     margin: 2px 0px;

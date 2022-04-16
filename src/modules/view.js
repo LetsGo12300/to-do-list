@@ -52,22 +52,6 @@ function loadContent(projectTitle){
     });
 }
 
-document.addEventListener('click', (event) => {
-    // if EDIT button is clicked
-    if (event.target.className === 'edit-btn') {
-        let item = controller.showItem(event.target.parentNode.parentNode.getAttribute('data-title'));
-        setDisplay.showModal();
-        populateModal.editToDoForm(item);
-    }
-    // if Project name is clicked
-    if (event.target.className === 'project-title'){
-        updateView.clearUnderline();
-        updateView.clearContent();
-        event.target.classList.add('current-project');
-        loadContent(event.target.textContent);
-    }
-});
-
 const setDisplay = ( () => {
     function showAddForm(){
         DOM.addForm.style.display = 'flex';
@@ -223,11 +207,11 @@ const populateModal = (() => {
 
     function editToDoForm(item){
         const form = document.createElement('form');
-        form.id = 'todo-form';
+        form.id = 'save-form';
         form.innerHTML = `
             <h3>
-                
-                ${item.title} <i>(editing...)</i>
+                <span id="edit-title">${item.title}</span>
+                 <i>(editing...)</i>
             </h3>
             <br>
 
@@ -235,7 +219,7 @@ const populateModal = (() => {
                 <p>
                     <label for="description"></label>
                 </p>
-                <textarea name="description" id="description" rows=6>${item.description}</textarea>
+                <textarea name="description" id="description" rows=6 value="${item.description}">${item.description}</textarea>
             </div>
 
             <div>
@@ -254,12 +238,12 @@ const populateModal = (() => {
             </div>
 
             <div class="btn">
-                <button type="submit" id="submit-btn">Save To Do</button>
+                <button type="submit" id="save-btn">Save To Do</button>
             </div>
         `;
         DOM.modalParagraph.appendChild(form);
-        DOM.toDoForm = document.getElementById('todo-form');
-        DOM.toDoForm.addEventListener('submit', controller.addItem);
+        DOM.saveForm = document.getElementById('save-form');
+        DOM.saveForm.addEventListener('submit', controller.editItem);
 
         document.querySelector(`#${item.priority}-priority`).checked = 'checked';
     }
@@ -269,6 +253,20 @@ const populateModal = (() => {
         editToDoForm
     }
 })();
+
+// event listeners
+document.addEventListener('click', (event) => {
+    if (event.target.className === 'edit-btn') {     // if EDIT button is clicked
+        let item = controller.showItem(event.target.parentNode.parentNode.getAttribute('data-title'));
+        setDisplay.showModal();
+        populateModal.editToDoForm(item);
+    } else if (event.target.className === 'project-title'){ // if Project name is clicked
+        updateView.clearUnderline();
+        updateView.clearContent();
+        event.target.classList.add('current-project');
+        loadContent(event.target.textContent);
+    }
+});
 
 export default view;
 export {setDisplay, updateView};

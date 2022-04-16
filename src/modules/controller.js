@@ -1,6 +1,6 @@
 import model from './model';
 import DOM from './DOM';
-import {setDisplay, updateView, loadTab} from './view';
+import {setDisplay, updateView} from './view';
 
 const controller = (() => {
     const showProjects = () => {
@@ -41,12 +41,33 @@ const controller = (() => {
         updateView.renderProject(newProject);
     };
 
+    const editItem = (event) => {
+        let editTitle = document.getElementById('edit-title').textContent;
+        let description = DOM.saveForm.elements['description'].value;
+        let dueDate = DOM.saveForm.elements['due-date'].value;
+        let priority = DOM.saveForm.elements['priority'].value;
+        
+        let editItem = {title: editTitle, description: description, dueDate: dueDate, priority: priority};
+
+        event.preventDefault();
+        setDisplay.hideModal();
+        DOM.saveForm.reset();
+        
+        model.updateItem(editItem, findItemIndex(editTitle));
+    };
+    
+    function findItemIndex(title){
+        const index = model.getToDoItems().findIndex(item => item.title === title);
+        return index;
+    }
+
     return {
       showProjects,
       showToDoItems,
       showItem,
       addProject,
-      addItem
+      addItem,
+      editItem,
     };
 })();
 
