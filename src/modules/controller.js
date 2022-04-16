@@ -23,7 +23,8 @@ const controller = (() => {
         let newItem = model.addToDoItem(title, description, dueDate, priority, project);
         setDisplay.hideModal();
         DOM.toDoForm.reset();
-        updateView.renderItem(newItem);
+        
+        if (document.getElementsByClassName('content-title')[0].textContent === project) updateView.renderItem(newItem);
     };
 
     const addProject = (event) => {

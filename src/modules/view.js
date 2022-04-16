@@ -30,7 +30,6 @@ function loadTab(){
     });
 
     DOM.addProject.addEventListener('click', setDisplay.showAddForm);
-    DOM.toDoForm.addEventListener('submit', controller.addItem);
     DOM.svgClose.addEventListener('click', setDisplay.hideAddForm);
     DOM.svgCheck.addEventListener('click', controller.addProject);
     DOM.addProjectForm.addEventListener('submit', controller.addProject);
@@ -67,11 +66,13 @@ const setDisplay = ( () => {
     
     function showModal(){
         DOM.modal.style.display = "block";
+        updateView.renderModal();
         updateView.renderOptions();
     }
     
     function hideModal(){
         DOM.modal.style.display = "none";
+        DOM.modalParagraph.innerHTML = '';
         updateView.clearOptions();
     }
 
@@ -86,8 +87,25 @@ const setDisplay = ( () => {
 const updateView = ( () => {
     function renderItem(item){
         const div = document.createElement('div');
-        div.textContent = item.title;
-        div.classList.add('todo-item');
+        div.classList.add('todo-item', item.priority);
+        div.setAttribute('data-title', item.title);
+
+        const title = document.createElement('div');
+        title.textContent = item.title;
+        div.appendChild(title);
+
+        const details = document.createElement('div');
+        const editButton = document.createElement('button');
+        editButton.textContent = 'EDIT';
+        
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'DELETE';
+
+        details.classList.add('details');
+        details.appendChild(editButton);
+        details.appendChild(deleteButton);
+        div.appendChild(details);
+        
         DOM.content.appendChild(div);
     }
 
@@ -102,6 +120,7 @@ const updateView = ( () => {
 
     function renderOptions(){
         const allProjects = controller.showProjects();
+        DOM.project = document.getElementById('project'); // options for project
 
         allProjects.forEach(project => {
             const option = document.createElement('option');
@@ -132,7 +151,57 @@ const updateView = ( () => {
         DOM.content.appendChild(div);
     }
 
+    function renderModal(){
+        const form = document.createElement('form');
+        form.id = 'todo-form';
+        form.innerHTML = `
+            <div>
+                <p>
+                    <label for="title">TITLE</label>
+                </p>
+                <input type="text" name="title" id="title" required>
+            </div>
+
+            <div>
+                <p>
+                    <label for="description">DESCRIPTION</label>
+                </p>
+                <textarea name="description" id="description" rows=6></textarea>
+            </div>
+
+            <div>
+                <label for="due-date">Pick a due date:</label>
+                <input type="date" name="due-date" id="due-date" required>
+            </div>
+            
+            <div>
+                <label for="priority">Select priority:</label>
+                <input type="radio" id="low-priority" name="priority" value="low" required="required">
+                <label for="low-priority">Low</label>
+                <input type="radio" id="medium-priority" name="priority" value="medium">
+                <label for="medium-priority">Medium</label>
+                <input type="radio" id="high-priority" name="priority" value="high">
+                <label for="high-priority">High</label>
+            </div>
+
+            <div>
+                <label for="project">Select project:</label>
+                <select name="project" id="project" required>
+                </select>
+            </div>
+            
+
+            <div class="btn">
+                <button type="submit" id="submit-btn">Create To Do</button>
+            </div>
+        `;
+        DOM.modalParagraph.appendChild(form);
+        DOM.toDoForm = document.getElementById('todo-form');
+        DOM.toDoForm.addEventListener('submit', controller.addItem);
+    }
+
     return {
+        renderModal,
         renderItem,
         renderProject,
         renderOptions,
