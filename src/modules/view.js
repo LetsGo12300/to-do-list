@@ -37,7 +37,9 @@ function loadTab(){
 
     Array.from(DOM.project_title).forEach(project => {
         project.addEventListener('click', () => {
+            updateView.clearUnderline();
             updateView.clearContent();
+            project.classList.add('current-project');
             loadContent(project.textContent);
         });
     });
@@ -46,13 +48,13 @@ function loadTab(){
 
 function loadContent(projectTitle){
     // Show all to do items
+    updateView.renderProjectTitle(projectTitle);
     const toDoItems = controller.showToDoItems(projectTitle);
     
     toDoItems.forEach(item => {
         updateView.renderItem(item);
     });
 }
-
 
 const setDisplay = ( () => {
     function showAddForm(){
@@ -98,7 +100,7 @@ const updateView = ( () => {
         DOM.project_titles.appendChild(li);
     }
 
-    function renderOptions(project){
+    function renderOptions(){
         const allProjects = controller.showProjects();
 
         allProjects.forEach(project => {
@@ -117,12 +119,27 @@ const updateView = ( () => {
         DOM.content.innerHTML = '';
     }
 
+    function clearUnderline(){
+        Array.from(DOM.project_title).forEach(project => {
+            project.classList.remove('current-project');
+        });
+    }
+
+    function renderProjectTitle(title){
+        const div = document.createElement('div');
+        div.classList.add('content-title');
+        div.textContent = title;
+        DOM.content.appendChild(div);
+    }
+
     return {
         renderItem,
         renderProject,
         renderOptions,
         clearOptions,
-        clearContent
+        clearContent,
+        clearUnderline,
+        renderProjectTitle
     }
 })();
 

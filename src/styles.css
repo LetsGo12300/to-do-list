@@ -198,3 +198,15 @@ textarea, #title{
 #project-titles>li>h3:hover{
     color: white;
 }
+
+.current-project{
+    text-decoration: underline;
+}
+
+.content-title{
+    margin-bottom: 20px;
+    margin-left: 5px;
+    color: black;
+    font-size: 1.5em;
+    font-weight: bold;
+}
