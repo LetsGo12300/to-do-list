@@ -62,12 +62,18 @@ const model = (() => {
         myLocalStorage.updateItems(storageItems);
     }
 
+    function removeItem(itemToDelete){
+        storageItems = storageItems.filter(item => item !== itemToDelete);
+        myLocalStorage.updateItems(storageItems);
+    }
+
     return {
         addToDoItem,
         addProject,
         getToDoItems,
         getProjects,
-        updateItem
+        updateItem,
+        removeItem
     }
 
 })();

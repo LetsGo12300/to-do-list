@@ -9,7 +9,6 @@ const controller = (() => {
 
     const showToDoItems = (projectTitle) => {
         return model.getToDoItems().filter(item => item.project === projectTitle);
-        
     };
 
     const showItem = (title) => {
@@ -61,6 +60,13 @@ const controller = (() => {
         return index;
     }
 
+    function deleteItem(itemToDelete){
+        model.removeItem(itemToDelete);
+        // remove to do item in DOM
+        const element = document.querySelector(`[data-title='${itemToDelete.title}'][data-project='${itemToDelete.project}']`);
+        element.remove();
+    }
+
     return {
       showProjects,
       showToDoItems,
@@ -68,6 +74,7 @@ const controller = (() => {
       addProject,
       addItem,
       editItem,
+      deleteItem
     };
 })();
 
