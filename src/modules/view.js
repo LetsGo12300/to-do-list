@@ -58,6 +58,7 @@ function loadContent(projectTitle){
 }
 
 function loadDueToday(){
+    updateView.clearUnderline();
     updateView.clearContent();
     const divDateToday = document.createElement('div');
     divDateToday.classList.add('date-today');

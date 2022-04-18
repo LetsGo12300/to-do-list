@@ -42,9 +42,12 @@ const controller = (() => {
 
     const addProject = (event) => {
         let project = DOM.addProjectForm.elements['new-project'].value;
-        if (project === ''){
-            alert('Please fill out the project field');
-        } else {
+
+        if (showProjects().filter(currentProject => currentProject.project === project).length !== 0){
+            alert('No duplicate projects allowed. Please rename project.');
+        } else if (project === ''){
+            alert('Please fill out the project field.');
+        }   else {
             event.preventDefault();
             let newProject = model.addProject(project);
             setDisplay.hideAddForm();
