@@ -3,10 +3,10 @@ import controller from './controller';
 import { format } from 'date-fns';
 
 function view() {
-
     loadModal();
     loadTab();
     loadContent('My Project');
+    document.getElementsByClassName('project-title')[0].classList.add('current-project');
 }
 
 const loadModal = function(){
@@ -43,7 +43,11 @@ function loadTab(){
     DOM.addProjectForm.addEventListener('submit', controller.addProject);
 
     DOM.dueToday.addEventListener('click', () => loadDueToday());
-    DOM.projects.addEventListener('click', () => loadContent('My Project'));
+    DOM.projects.addEventListener('click', () => {
+        updateView.clearUnderline();
+        loadContent('My Project');
+        document.getElementsByClassName('project-title')[0].classList.add('current-project');
+    });
 }
 
 function loadContent(projectTitle){
