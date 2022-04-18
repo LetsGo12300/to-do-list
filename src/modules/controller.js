@@ -11,8 +11,8 @@ const controller = (() => {
         return model.getToDoItems().filter(item => item.project === projectTitle);
     };
 
-    const showItem = (title) => {
-        return model.getToDoItems().filter(item => item.title === title)[0]
+    const showItem = (title, project) => {
+        return model.getToDoItems().filter(item => item.title === title && item.project === project)[0]
     };
 
     const addItem = (event) => {
@@ -28,7 +28,7 @@ const controller = (() => {
             let newItem = model.addToDoItem(title, description, dueDate, priority, project);
             setDisplay.hideModal();
             DOM.toDoForm.reset();
-            
+
             if (document.getElementsByClassName('content-title')[0].textContent === project) updateView.renderItem(newItem);
         } else {
             alert('Please choose a new project title ');

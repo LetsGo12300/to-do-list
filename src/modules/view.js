@@ -1,5 +1,6 @@
 import DOM from './DOM';
 import controller from './controller';
+import { differenceInBusinessDays } from 'date-fns';
 
 function view() {
 
@@ -248,26 +249,47 @@ const populateModal = (() => {
         document.querySelector(`#${item.priority}-priority`).checked = 'checked';
     }
 
+    function showDetails(item){
+        const div = document.createElement('div');
+        div.classList.add('show-div');
+        div.innerHTML = `
+            <h2 class="detail-title">${item.title}</h2>
+            <div class="indent">
+                <div><b>Project</b>: ${item.project}</div>
+                <div><b>Priority</b>: ${item.priority}</div>
+                <div><b>Due date</b>: ${item.dueDate}</div>
+                <br>
+                <div><p>${item.description}</p></div>
+            </div>
+        `;
+        DOM.modalParagraph.appendChild(div);
+    }
+
     return {
         addToDoForm,
-        editToDoForm
+        editToDoForm,
+        showDetails
     }
 })();
 
 // event listeners
 document.addEventListener('click', (event) => {
     if (event.target.className === 'edit-btn') {     // if EDIT button is clicked
-        let item = controller.showItem(event.target.parentNode.parentNode.getAttribute('data-title'));
+        let item = controller.showItem(event.target.parentNode.parentNode.getAttribute('data-title'), event.target.parentNode.parentNode.getAttribute('data-project'));
         setDisplay.showModal();
         populateModal.editToDoForm(item);
     } else if (event.target.className === 'delete-btn'){ // if DELETE button is clicked
-        let item = controller.showItem(event.target.parentNode.parentNode.getAttribute('data-title'));
+        let item = controller.showItem(event.target.parentNode.parentNode.getAttribute('data-title'), event.target.parentNode.parentNode.getAttribute('data-project'));
         controller.deleteItem(item);
     } else if (event.target.className === 'project-title'){ // if Project name is clicked
         updateView.clearUnderline();
         updateView.clearContent();
         event.target.classList.add('current-project');
         loadContent(event.target.textContent);
+    } else if (event.target.classList[0] === 'todo-item'){ // if a todo item is clicked, show details
+        let item = controller.showItem(event.target.getAttribute('data-title'), event.target.getAttribute('data-project'));
+        setDisplay.showModal();
+        populateModal.showDetails(item);
     }
 });
 

@@ -52,7 +52,7 @@ body{
 }
 
 .tab>button:hover, #submit-btn:hover, #save-btn:hover{
-    background-color: #d1d5db;
+    background-color: #dde1e7;
 }
 
 #content{
@@ -75,7 +75,7 @@ body{
     background-color: #38bdf8;
 }
 
-.modal {
+.modal{
     display: none;
     position: fixed;
     z-index: 1;
@@ -96,6 +96,9 @@ body{
     padding: 20px;
     border: 1px solid #888;
     width: 70%;
+}
+
+#save-form, #todo-form{
     text-align: center;
 }
   
@@ -161,6 +164,7 @@ textarea, #title{
     justify-content: space-between;
     align-items: center;
     overflow-x: auto;
+    cursor: pointer;
 }
 
 .details{
@@ -172,7 +176,8 @@ textarea, #title{
 .details>button{
     padding: 8px;
     border: none;
-    background-color: #d1d5db;
+    background-color: #e5e9ee;
+    cursor: pointer;
 }
 
 .details>button:hover{
@@ -232,4 +237,30 @@ textarea, #title{
 
 h3>i{
     color: #aaadb3;
+}
+
+.low{
+    background-color: #bef264;
+}
+
+.medium{
+    background-color: #fde68a;
+}
+
+.high{
+    background-color: #fca5a5;
+}
+
+.show-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-title{
+    text-align: center;
+}
+
+.indent{
+    margin-top: 10px;
+    margin-left: 20px;
 }

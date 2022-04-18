@@ -46,7 +46,6 @@ const model = (() => {
         return addedProject;
     }
 
-
     function getToDoItems(){
         return storageItems;
     }
@@ -75,7 +74,6 @@ const model = (() => {
         updateItem,
         removeItem
     }
-
 })();
 
 export default model;
