@@ -15,6 +15,10 @@ const controller = (() => {
         return model.getToDoItems().filter(item => item.title === title && item.project === project)[0]
     };
 
+    const showDueToday = (date) => {
+        return model.getToDoItems().filter(item => item.dueDate === date);
+    }
+
     const addItem = (event) => {
         let title = DOM.toDoForm.elements['title'].value;
         let description = DOM.toDoForm.elements['description'].value;
@@ -83,6 +87,7 @@ const controller = (() => {
       showProjects,
       showToDoItems,
       showItem,
+      showDueToday,
       addProject,
       addItem,
       editItem,

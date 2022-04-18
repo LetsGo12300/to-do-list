@@ -14,7 +14,7 @@ body{
     height: 100vh;
     display: grid;
     grid-template-rows: 100px 1fr 50px;
-    grid-template-columns: 30% 70%;
+    grid-template-columns: 25% 75%;
 }
 
 .header{
@@ -37,13 +37,23 @@ body{
     grid-column:  1 / 2;
     display: flex;
     flex-direction: column;
-    align-items: center;
     padding: 2em;
     color: white;
     background-color: #fcd34d;
 }
 
-.tab>button{
+.tab>h1{
+    background-color: #fde047;
+    cursor: pointer;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.tab>h1:hover{
+    background-color: #fef08a;
+}
+
+.tab-actions>button{
     width: 50%;
     padding: 5px;
     margin: 2px 0px;
@@ -51,8 +61,15 @@ body{
     font-size: 1em;
 }
 
-.tab>button:hover, #submit-btn:hover, #save-btn:hover{
+.tab-actions>button:hover, #submit-btn:hover, #save-btn:hover{
     background-color: #dde1e7;
+}
+
+.tab-actions{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
 }
 
 #content{
@@ -63,6 +80,14 @@ body{
     padding: 1.5em;
     color: white;
     background-color: #f0f9ff;
+}
+
+.date-today{
+    text-align: left;
+    color: #747474;
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
 .footer{
@@ -89,7 +114,6 @@ body{
     background-color: rgba(0,0,0,0.4);
 }
   
-
 .modal-content{
     background-color: #f0f9ff;
     margin: auto;
@@ -213,14 +237,14 @@ textarea, #title{
 }
 
 #project-titles>li{
-    margin-bottom: 15px;
-    padding: 2px;
+    margin-bottom: 10px;
+    padding-left: 25px;
     list-style: none;
     cursor: pointer;
 }
 
 #project-titles>li>h3:hover{
-    color: white;
+    text-decoration: underline;
 }
 
 .current-project{

@@ -1,6 +1,6 @@
 import DOM from './DOM';
 import controller from './controller';
-import { differenceInBusinessDays } from 'date-fns';
+import { format } from 'date-fns';
 
 function view() {
 
@@ -41,10 +41,14 @@ function loadTab(){
     DOM.svgClose.addEventListener('click', setDisplay.hideAddForm);
     DOM.svgCheck.addEventListener('click', controller.addProject);
     DOM.addProjectForm.addEventListener('submit', controller.addProject);
+
+    DOM.dueToday.addEventListener('click', () => loadDueToday());
+    DOM.projects.addEventListener('click', () => loadContent('My Project'));
 }
 
 function loadContent(projectTitle){
-    // Show all to do items
+    updateView.clearContent();
+    // Get all to do items [based on project title]
     updateView.renderProjectTitle(projectTitle);
     const toDoItems = controller.showToDoItems(projectTitle);
     
@@ -53,8 +57,24 @@ function loadContent(projectTitle){
     });
 }
 
+function loadDueToday(){
+    updateView.clearContent();
+    const divDateToday = document.createElement('div');
+    divDateToday.classList.add('date-today');
+    divDateToday.textContent = format(new Date(), 'EEEE, dd MMMM yyyy');
+    DOM.content.appendChild(divDateToday);
+
+    // Get all to do items [due today]
+    const dateToday = format(new Date(), 'yyyy-MM-dd');
+    const itemsDueToday = controller.showDueToday(dateToday);
+
+    itemsDueToday.forEach(item => {
+        updateView.renderItem(item);
+    });
+}
+
 const setDisplay = ( () => {
-    function showAddForm(){
+    function showAddForm(){re
         DOM.addForm.style.display = 'flex';
     }
     
@@ -252,12 +272,15 @@ const populateModal = (() => {
     function showDetails(item){
         const div = document.createElement('div');
         div.classList.add('show-div');
+
+        const date = new Date(item.dueDate);
+
         div.innerHTML = `
             <h2 class="detail-title">${item.title}</h2>
             <div class="indent">
                 <div><b>Project</b>: ${item.project}</div>
                 <div><b>Priority</b>: ${item.priority}</div>
-                <div><b>Due date</b>: ${item.dueDate}</div>
+                <div><b>Due date</b>: ${format(date, 'eeee, dd MMMM yyyy')}</div>
                 <br>
                 <div><p>${item.description}</p></div>
             </div>
@@ -283,7 +306,6 @@ document.addEventListener('click', (event) => {
         controller.deleteItem(item);
     } else if (event.target.className === 'project-title'){ // if Project name is clicked
         updateView.clearUnderline();
-        updateView.clearContent();
         event.target.classList.add('current-project');
         loadContent(event.target.textContent);
     } else if (event.target.classList[0] === 'todo-item'){ // if a todo item is clicked, show details

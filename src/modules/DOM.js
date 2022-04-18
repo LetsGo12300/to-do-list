@@ -14,7 +14,9 @@ const DOM = {
     addForm: document.getElementById('add-form'),
     addProjectForm: document.getElementById('add-project-form'),
     svgClose: document.getElementById('svg-close'),
-    svgCheck: document.getElementById('svg-check')
+    svgCheck: document.getElementById('svg-check'),
+    dueToday: document.getElementById('due-today'),
+    projects: document.getElementById('projects')
 };
 
 export default DOM;
