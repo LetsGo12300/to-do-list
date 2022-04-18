@@ -32,12 +32,15 @@ const controller = (() => {
 
     const addProject = (event) => {
         let project = DOM.addProjectForm.elements['new-project'].value;
-
-        event.preventDefault();
-        let newProject = model.addProject(project);
-        setDisplay.hideAddForm();
-        DOM.addProjectForm.reset();
-        updateView.renderProject(newProject);
+        if (project === ''){
+            window.alert('Please fill out the project field');
+        } else {
+            event.preventDefault();
+            let newProject = model.addProject(project);
+            setDisplay.hideAddForm();
+            DOM.addProjectForm.reset();
+            updateView.renderProject(newProject);
+        }
     };
 
     const editItem = (event) => {
