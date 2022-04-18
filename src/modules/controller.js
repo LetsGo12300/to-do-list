@@ -21,19 +21,25 @@ const controller = (() => {
         let dueDate = DOM.toDoForm.elements['due-date'].value;
         let priority = DOM.toDoForm.elements['priority'].value;
         let project = DOM.toDoForm.elements['project'].value;
-        
-        event.preventDefault();
-        let newItem = model.addToDoItem(title, description, dueDate, priority, project);
-        setDisplay.hideModal();
-        DOM.toDoForm.reset();
-        
-        if (document.getElementsByClassName('content-title')[0].textContent === project) updateView.renderItem(newItem);
+
+        // check if there is a duplicate title in the project
+        if (showToDoItems(project).filter(item => item.title === title).length === 0){
+            event.preventDefault();
+            let newItem = model.addToDoItem(title, description, dueDate, priority, project);
+            setDisplay.hideModal();
+            DOM.toDoForm.reset();
+            
+            if (document.getElementsByClassName('content-title')[0].textContent === project) updateView.renderItem(newItem);
+        } else {
+            alert('Please choose a new project title ');
+            event.preventDefault();
+        }
     };
 
     const addProject = (event) => {
         let project = DOM.addProjectForm.elements['new-project'].value;
         if (project === ''){
-            window.alert('Please fill out the project field');
+            alert('Please fill out the project field');
         } else {
             event.preventDefault();
             let newProject = model.addProject(project);
@@ -56,6 +62,9 @@ const controller = (() => {
         DOM.saveForm.reset();
         
         model.updateItem(editItem, findItemIndex(editTitle));
+        // Update priority class:
+        let updateDOM = document.querySelector(`[data-title='${editTitle}']`);
+        updateDOM.className = `todo-item ${priority}`;  
     };
     
     function findItemIndex(title){

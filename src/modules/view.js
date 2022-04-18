@@ -260,7 +260,7 @@ document.addEventListener('click', (event) => {
         let item = controller.showItem(event.target.parentNode.parentNode.getAttribute('data-title'));
         setDisplay.showModal();
         populateModal.editToDoForm(item);
-    } else if (event.target.className === 'delete-btn'){ // if Project name is clicked
+    } else if (event.target.className === 'delete-btn'){ // if DELETE button is clicked
         let item = controller.showItem(event.target.parentNode.parentNode.getAttribute('data-title'));
         controller.deleteItem(item);
     } else if (event.target.className === 'project-title'){ // if Project name is clicked

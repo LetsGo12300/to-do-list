@@ -154,7 +154,6 @@ textarea, #title{
 }
 
 .todo-item{
-    background-color: #fef08a;
     color: black;
     margin: 5px;
     padding: 20px;
@@ -162,7 +161,6 @@ textarea, #title{
     justify-content: space-between;
     align-items: center;
     overflow-x: auto;
-
 }
 
 .details{
