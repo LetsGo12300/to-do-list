@@ -74,7 +74,7 @@ function loadDueToday(){
 }
 
 const setDisplay = ( () => {
-    function showAddForm(){re
+    function showAddForm(){
         DOM.addForm.style.display = 'flex';
     }
     

@@ -69,7 +69,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 20px;
+    margin: 20px 0px;
 }
 
 #content{
@@ -254,8 +254,8 @@ textarea, #title{
 .content-title{
     margin-bottom: 20px;
     margin-left: 5px;
-    color: black;
-    font-size: 1.5em;
+    color: #747474;
+    font-size: 2em;
     font-weight: bold;
 }
 
@@ -287,4 +287,12 @@ h3>i{
 .indent{
     margin-top: 10px;
     margin-left: 20px;
+}
+
+svg{
+    cursor: pointer;
+}
+
+svg:hover{
+    color: brown;
 }
