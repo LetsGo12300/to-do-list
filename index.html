@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">
+                <h1>To Do List</h1>
+            </div>
+        </div>
+        <div class="tab">
+            <h1 id="due-today">Due Today</h1>
+            <h1 id="projects">Projects</h1>
+            <ul id="project-titles"></ul>
+            <div class="tab-actions">
+                <button id="add-project">Add Project</button>
+                <div id="add-form">
+                    <form action="#" id="add-project-form">
+                        <input type="text" name="new-project" id="new-project" placeholder="new project ..." autocomplete="off" required>
+                        <div class="svg-form">
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24" id="svg-close">
+                                <path fill="currentColor" d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z" />
+                            </svg>
+                            <svg style="width:24px;height:24px" viewBox="0 0 24 24" id="svg-check">
+                                <path fill="currentColor" d="M9,20.42L2.79,14.21L5.62,11.38L9,14.77L18.88,4.88L21.71,7.71L9,20.42Z" />
+                            </svg>
+                        </div>
+                        
+                    </form>
+                    
+                </div>
+                <button id="add-todo">Add To Do Item</button>
+            </div>
+        </div>
+        <div id="content"></div>
+        <div class="footer">Copyright © 2022</div>
+
+        <div class="modal-container">
+            <div id="todo-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <br>
+                    <p id="modal-p">
+                        
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <script src="main.js"></script>
+</body>
+</html>
