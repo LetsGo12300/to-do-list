@@ -287,7 +287,7 @@ const populateModal = (() => {
                 <div><b>Priority</b>: ${item.priority}</div>
                 <div><b>Due date</b>: ${format(date, 'eeee, dd MMMM yyyy')}</div>
                 <br>
-                <div><p>${item.description}</p></div>
+                <div><p class="detail-p">${item.description}</p></div>
             </div>
         `;
         DOM.modalParagraph.appendChild(div);
