@@ -195,6 +195,7 @@ textarea, #title{
 .todo-item>:nth-child(1){
     width: 80%;
     word-wrap: break-word;
+    pointer-events: none;
 }
 
 .details{
@@ -311,7 +312,7 @@ svg:hover{
 
 #edit-title{
     word-wrap: break-word;
-}
+}z
 
 @media (max-width: 640px){
     .container{
